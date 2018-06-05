@@ -1,0 +1,8 @@
+.demo {
+  background: #000;
+
+  &.a {
+    color: #fff;
+    border: #fff 1px solid;
+  }
+}

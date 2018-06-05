@@ -1,0 +1,24 @@
+{
+  "parser"  : "babel-eslint",
+  "extends" : [
+    "standard"
+  ],
+  "plugins" : [
+    "flow-vars"
+  ],
+  "env"     : {
+    "browser" : true
+  },
+  "rules": {
+    "arrow-parens": 0,
+    "jsx-quotes": [2, "prefer-double"],
+    "space-before-function-paren": [2, { "anonymous": "always", "named": "never" }],
+    "flow-vars/define-flow-type": 1,
+    "flow-vars/use-flow-type": 1,
+    "spaced-comment": 0,
+    "no-debugger": 1,
+    "no-unused-vars": 1,
+    "no-useless-escape": 1,
+    "camelcase": 0
+  }
+}
