@@ -1,6 +1,8 @@
 var webpack = require('webpack')
 var config = require('../config')
 var merge = require('webpack-merge')
+var utils = require('../utils')
+var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var baseWebpackConfig = require('./webpack.base.config')
 
 config.productionSourceMap = false
@@ -15,6 +17,7 @@ baseWebpackConfig = merge(baseWebpackConfig, {
         NODE_ENV: '"production"'
       }
     }),
+    new ExtractTextPlugin(utils.resolve(config.assetsRoot, '[name].[contenthash:7].css')),
     new webpack.optimize.UglifyJsPlugin({
       minimize: true,
       compress: {

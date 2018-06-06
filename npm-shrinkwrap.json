@@ -3820,11 +3820,6 @@
       "dev": true,
       "optional": true
     },
-    "jquery": {
-      "version": "3.3.1",
-      "from": "jquery@>=3.3.1 <4.0.0",
-      "resolved": "https://registry.npm.taobao.org/jquery/download/jquery-3.3.1.tgz"
-    },
     "jquery-ui": {
       "version": "1.12.1",
       "from": "jquery-ui@latest",

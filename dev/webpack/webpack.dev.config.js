@@ -35,6 +35,7 @@ Object.keys(entries).forEach(function (name) {
     template: utils.resolve('src/index.ejs'),
     title: 'zui - ' + nameSpace,
     inject: 'body',
+    chunks: [name, 'vendor'],
     minify: {
       removeComments: true,
       collapseWhitespace: true,

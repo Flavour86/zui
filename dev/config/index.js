@@ -12,7 +12,7 @@ var config = {
   dev: {
     env: require('./dev.env.js'),
     port: 8080,
-    assetsRoot: utils.resolve('dist'),
+    // assetsRoot: utils.resolve('dist'),
     assetsPublicPath: '/',
     assetsSubDirectory: 'static',
     cssSourceMap: true,

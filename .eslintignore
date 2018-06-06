@@ -3,4 +3,5 @@ node_modules/**
 dist/**
 dev/**
 config/**
+src/lib/**
 src/common/variables.js

@@ -3,20 +3,35 @@ var path = require('path')
 var entries = require('./../utils/entries')
 var config = require('../config')
 var utils = require('../utils')
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var webpackConfig = {
   entry: {
     index: utils.resolve('src/index.js'),
     vendor: [
-      'jquery'
+      'jquery/jquery.js'
     ]
   },
   output: {
     path: config.assetsRoot,
     publicPath: config.assetsPublicPath,
-    filename: "[name].js"
+    filename: '[name].[chunkhash:7].js'
   },
   module: {
     rules: [
+      {
+        test: require.resolve('jquery/jquery.js'),
+        use: 'expose-loader?jQuery!expose-loader?$'
+      },
+      {
+        test: require.resolve('jquery-ui'),
+        use: [
+          {
+            loader: 'export-loader',
+            options: '$widget'
+          },
+          'script-loader'
+        ]
+      },
       {
         test: /\.json$/,
         use: [
@@ -32,17 +47,11 @@ var webpackConfig = {
       },
       {
         test: /\.css$/,
-        use: [
-          {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 1
-            }
-          },
-          {
-            loader: 'postcss-loader'
-          }
-        ]
+        use: ExtractTextPlugin.extract([
+          'style-loader',
+          'css-loader',
+          'postcss-loader'
+        ])
       },
       {
         test: /\.(png|jpg|gif|ico|svg)$/,
@@ -56,7 +65,7 @@ var webpackConfig = {
   },
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({
-      name: "vendor",
+      name: 'vendor',
       minChunks: Infinity
     })
   ],
@@ -66,7 +75,8 @@ var webpackConfig = {
     alias: {
       'common': utils.resolve('src/common'),
       'components': utils.resolve('src/components'),
-      'utils': utils.resolve('src/utils')
+      'utils': utils.resolve('src/utils'),
+      'lib': utils.resolve('src/lib')
     }
   }
 }
