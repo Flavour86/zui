@@ -17,7 +17,7 @@ baseWebpackConfig = merge(baseWebpackConfig, {
         NODE_ENV: '"production"'
       }
     }),
-    new ExtractTextPlugin(utils.resolve(config.assetsRoot, '[name].[contenthash:7].css')),
+    new ExtractTextPlugin(utils.resolve(config.assetsRoot, '[name].[contenthash:15].css')),
     new webpack.optimize.UglifyJsPlugin({
       minimize: true,
       compress: {

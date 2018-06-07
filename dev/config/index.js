@@ -16,7 +16,7 @@ var config = {
     assetsPublicPath: '/',
     assetsSubDirectory: 'static',
     cssSourceMap: true,
-    autoOpenBrowser: true,
+    autoOpenBrowser: false,
     noInfo: true
   }
 }

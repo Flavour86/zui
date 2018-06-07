@@ -8,30 +8,18 @@ var webpackConfig = {
   entry: {
     index: utils.resolve('src/index.js'),
     vendor: [
-      'jquery/jquery.js'
+      'jquery/jquery.js',
+      'jquery-ui'
     ]
   },
   output: {
     path: config.assetsRoot,
     publicPath: config.assetsPublicPath,
-    filename: '[name].[chunkhash:7].js'
+    filename: '[name].[hash:15].js'
   },
   module: {
     rules: [
-      {
-        test: require.resolve('jquery/jquery.js'),
-        use: 'expose-loader?jQuery!expose-loader?$'
-      },
-      {
-        test: require.resolve('jquery-ui'),
-        use: [
-          {
-            loader: 'export-loader',
-            options: '$widget'
-          },
-          'script-loader'
-        ]
-      },
+      ...utils.AmdGenerateLoader(),
       {
         test: /\.json$/,
         use: [
@@ -47,7 +35,7 @@ var webpackConfig = {
       },
       {
         test: /\.css$/,
-        use: ExtractTextPlugin.extract({
+        use: utils.isProd ? ExtractTextPlugin.extract({
           fallback: 'style-loader',
           use: [
             {
@@ -58,7 +46,16 @@ var webpackConfig = {
             },
             'postcss-loader'
           ]
-        })
+        }) : [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1
+            }
+          },
+          'postcss-loader'
+        ]
       },
       {
         test: /\.(png|jpg|gif|ico|svg)$/,
