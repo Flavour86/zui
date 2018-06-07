@@ -47,11 +47,18 @@ var webpackConfig = {
       },
       {
         test: /\.css$/,
-        use: ExtractTextPlugin.extract([
-          'style-loader',
-          'css-loader',
-          'postcss-loader'
-        ])
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                importLoaders: 1
+              }
+            },
+            'postcss-loader'
+          ]
+        })
       },
       {
         test: /\.(png|jpg|gif|ico|svg)$/,
