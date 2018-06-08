@@ -1,4 +1,4 @@
-import $ from 'jquery'
+import 'jquery'
 import utils from 'utils'
 import onFire from 'onfire.js'
 
@@ -104,6 +104,6 @@ class I18N {
   }
 }
 
-if ($.i18n.lang === undefined) {
+if (!$.i18n || $.i18n.lang === undefined) {
   $.i18n = new I18N(utils.LANGUAGE)
 }

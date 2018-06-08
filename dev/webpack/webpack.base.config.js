@@ -80,7 +80,7 @@ var webpackConfig = {
       'common': utils.resolve('src/common'),
       'components': utils.resolve('src/components'),
       'utils': utils.resolve('src/utils'),
-      'lib': utils.resolve('src/lib')
+      'i18n': utils.resolve('src/i18n')
     }
   }
 }

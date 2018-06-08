@@ -3,7 +3,8 @@
  */
 import './style.css'
 import 'common/base'
+import 'i18n'
 
-export default function () {
-  console.log('2222222224444444444443')
-}
+(function () {
+  console.log($.i18n, '111')
+}())
