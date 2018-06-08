@@ -8,7 +8,7 @@ var webpackConfig = {
   entry: {
     index: utils.resolve('src/index.js'),
     vendor: [
-      'jquery/jquery.js',
+      'jquery',
       'jquery-ui'
     ]
   },

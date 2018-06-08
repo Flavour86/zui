@@ -2,7 +2,7 @@ var path = require('path')
 
 // amd 异步模块引入配置
 var AMD = [
-  {test: 'jquery/jquery.js', options: '$'},
+  {test: 'jquery', options: '$'},
   {test: 'jquery-ui', options: '$widget'}
 ]
 

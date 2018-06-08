@@ -1,4 +1,4 @@
-import 'jquery/jquery.js'
+import 'jquery'
 
 export default {
   jq: $,
