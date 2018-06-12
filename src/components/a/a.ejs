@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta content="telephone=no,email=no" name="format-detection">
+  <title><%= htmlWebpackPlugin.options.title %></title>
+</head>
+<body>
+<div id="demo">
+</div>
+<script>
+  window.onload = function () {
+    $('.form_datetime').datetime({
+      show: function (data) {
+//            console.log(data)
+      },
+      change: function (ev) {
+//            console.log('change', ev)
+      }
+    })
+//        $(".form_datetime").datetimepicker({
+//          format: "dd MM yyyy - HH:ii P",
+//          showMeridian: true,
+//          autoclose: true,
+//          todayBtn: true
+//        });
+
+  }
+</script>
+</body>
+</html>

@@ -1,5 +1,5 @@
 export default {
-  common: {
+  base: {
     btn_search: '查询',
     btn_reset: '重置',
     save_success: '保存成功',

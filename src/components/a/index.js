@@ -6,5 +6,14 @@ import 'common/base'
 import 'i18n'
 
 (function () {
-  console.log($.i18n, '111')
+  const t = $.i18n.getFixedT('a', {
+    'zh-CN': {
+      a: '我是拓展的语言包, {name}'
+    },
+    'en-US': {
+      a: '我是拓展的语言包en-USen-US, {name}'
+    }
+  }, 'en-US')
+  const str = t('a', {name: '你好！'})
+  console.log($.i18n, str, '111')
 }())

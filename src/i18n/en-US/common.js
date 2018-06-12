@@ -1,5 +1,5 @@
 export default {
-  common: {
+  base: {
     btn_search: 'Search',
     btn_reset: 'Reset',
     save_success: 'Save Success',

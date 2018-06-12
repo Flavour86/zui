@@ -19,9 +19,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bootstrap-datetime-picker": "git+https://github.com/smalot/bootstrap-datetimepicker.git#2.4.0",
     "icheck": "^1.0.2",
     "jquery": "^1.12.1",
     "jquery-ui": "^1.12.1",
+    "lodash": "https://registry.npm.taobao.org/lodash/download/lodash-4.17.10.tgz",
+    "moment": "^2.22.2",
     "onfire.js": "^1.0.6"
   },
   "devDependencies": {

@@ -1,1 +1,1 @@
-export const LANGUAGE = 'zh_CN'
+export const LANGUAGE = window.navigator.systemLanguage || window.navigator.language
