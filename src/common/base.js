@@ -1,4 +1,4 @@
-import 'jquery'
+import 'jquery/dist/jquery.min'
 import 'jquery-ui'
 import Variables from 'common/variables'
 

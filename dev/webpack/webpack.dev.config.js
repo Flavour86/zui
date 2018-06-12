@@ -2,8 +2,8 @@ var webpack = require('webpack')
 var config = require('../config')
 var merge = require('webpack-merge')
 var utils = require('../utils')
-var entries = require('../utils/entries')
-var HtmlWebpackPlugin = require('html-webpack-plugin')
+// var entries = require('../utils/entries')
+// var HtmlWebpackPlugin = require('html-webpack-plugin')
 var baseWebpackConfig = require('./webpack.base.config')
 
 var webpackConfig = merge(baseWebpackConfig, {
@@ -27,22 +27,4 @@ var webpackConfig = merge(baseWebpackConfig, {
   ]
 })
 
-Object.keys(entries).forEach(function (name) {
-  webpackConfig.entry[name] = [utils.resolve('dev/utils/dev-client')].concat(webpackConfig.entry[name])
-  var nameSpace = name.indexOf('/') > -1 ?  name.split('/')[1] : name
-  webpackConfig.plugins.push(new HtmlWebpackPlugin({
-    filename: name + '.html',
-    template: utils.resolve('src/index.ejs'),
-    title: 'zui - ' + nameSpace,
-    inject: 'body',
-    chunks: [name, 'vendor'],
-    minify: {
-      removeComments: true,
-      collapseWhitespace: true,
-      removeRedundantAttributes: true,
-      removeStyleLinkTypeAttributes: true,
-      keepClosingSlash: true
-    }
-  }))
-})
 module.exports = webpackConfig

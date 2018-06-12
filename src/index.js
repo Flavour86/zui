@@ -1,4 +1,4 @@
-import 'jquery'
+import 'jquery/dist/jquery.min'
 
 export default {
   jq: $,

@@ -1,5 +1,5 @@
-import 'jquery'
-import onFire from 'onfire.js'
+import 'jquery/dist/jquery.min'
+import onFire from 'onfire.js/dist/onfire.min'
 import utils from 'utils'
 
 class I18N {

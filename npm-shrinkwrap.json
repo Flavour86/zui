@@ -8054,7 +8054,7 @@
     },
     "uglify-js": {
       "version": "3.3.28",
-      "from": "uglify-js@>=3.3.0 <3.4.0",
+      "from": "https://registry.npm.taobao.org/uglify-js/download/uglify-js-3.3.28.tgz",
       "resolved": "https://registry.npm.taobao.org/uglify-js/download/uglify-js-3.3.28.tgz",
       "dev": true,
       "dependencies": {

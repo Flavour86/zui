@@ -1,21 +1,23 @@
 var webpack = require('webpack')
 var path = require('path')
+var fs = require('fs')
 var entries = require('./../utils/entries')
 var config = require('../config')
 var utils = require('../utils')
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var ExtractTextPlugin = require('extract-text-webpack-plugin')
+var HtmlWebpackPlugin = require('html-webpack-plugin')
+var UglifyJS = require('uglify-js')
 var webpackConfig = {
   entry: {
     index: utils.resolve('src/index.js'),
     vendor: [
-      'jquery',
-      'jquery-ui'
+      'jquery/dist/jquery.min'
     ]
   },
   output: {
     path: config.assetsRoot,
     publicPath: config.assetsPublicPath,
-    filename: '[name].[hash:15].js'
+    filename: '[name].js'
   },
   module: {
     rules: [
@@ -68,10 +70,7 @@ var webpackConfig = {
     ]
   },
   plugins: [
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      minChunks: Infinity
-    })
+    new webpack.ContextReplacementPlugin(/moment[\\\/]locale$/, /^\.\/(zh-cn|zh-tw)$/)
   ],
   resolve: {
     modules: ['node_modules', 'src'],
@@ -85,5 +84,24 @@ var webpackConfig = {
   }
 }
 webpackConfig.entry = Object.assign(webpackConfig.entry, entries)
-
+Object.keys(entries).forEach(function (name) {
+  webpackConfig.entry[name] = [utils.resolve('dev/utils/dev-client')].concat(webpackConfig.entry[name])
+  var nameSpace = name.indexOf('/') > -1 ?  name.split('/')[1] : name
+  var demoFile = utils.resolve('src/components/' + nameSpace + '/demo.js')
+  webpackConfig.plugins.push(new HtmlWebpackPlugin({
+    filename: name + '.html',
+    template: utils.resolve('src/' + name + '.ejs'),
+    inject: 'body',
+    chunksSortMode: 'manual',
+    chunks: utils.isProd ? ['manifest', 'vendor', name] : ['vendor', name],
+    exampleScript: UglifyJS.minify(fs.readFileSync(utils.resolve(demoFile), 'utf8'), {mangle: {toplevel: true}}).code,
+    minify: {
+      // removeComments: true,
+      // collapseWhitespace: true,
+      removeRedundantAttributes: true,
+      removeStyleLinkTypeAttributes: true,
+      keepClosingSlash: true
+    }
+  }))
+})
 module.exports = webpackConfig

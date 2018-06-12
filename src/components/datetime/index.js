@@ -1,6 +1,6 @@
 import 'bootstrap-datetime-picker/css/bootstrap-datetimepicker.min.css'
 import 'common/base'
-import 'bootstrap-datetime-picker'
+import 'bootstrap-datetime-picker/js/bootstrap-datetimepicker.min'
 import moment from 'moment'
 import utils from 'utils'
 

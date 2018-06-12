@@ -2,8 +2,9 @@ var path = require('path')
 
 // amd 异步模块引入配置
 var AMD = [
-  {test: 'jquery', options: '$'},
-  {test: 'jquery-ui', options: '$widget'}
+  {test: 'jquery/dist/jquery.min', options: '$'},
+  {test: 'jquery-ui', options: '$widget'},
+  {test: 'bootstrap-datetime-picker/js/bootstrap-datetimepicker.min'}
 ]
 
 module.exports.resolve = function () {

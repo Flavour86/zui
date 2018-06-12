@@ -1,7 +1,9 @@
+var path = require('path')
 var webpack = require('webpack')
 var config = require('../config')
 var merge = require('webpack-merge')
 var utils = require('../utils')
+var entries = require('./../utils/entries')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var baseWebpackConfig = require('./webpack.base.config')
 
@@ -17,7 +19,23 @@ baseWebpackConfig = merge(baseWebpackConfig, {
         NODE_ENV: '"production"'
       }
     }),
-    new ExtractTextPlugin(utils.resolve(config.assetsRoot, '[name].[contenthash:15].css')),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'commons',
+      filename: "commons.js",
+      chunks: Object.keys(entries),
+      // children: true,
+      minChunks: function (module, count) {
+        // console.log(module.resource, (module.resource && /\.js$/.test(module.resource) && module.resource.indexOf(path.join(__dirname, '../../node_modules')) === 0), (module.resource && count > 2), count, 'minChunks')
+        console.log('minChunks: ', module.resource, count)
+        const isNodeModules = module.resource && /\.js$/.test(module.resource) && module.resource.indexOf(path.join(__dirname, '../../node_modules')) === 0
+        return isNodeModules && count >= 2 || !isNodeModules && count > 2
+      }
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      names: ['vendor', 'manifest'],
+      minChunks: Infinity
+    }),
+    new ExtractTextPlugin(utils.resolve(config.assetsRoot, '[name].css')),
     new webpack.optimize.UglifyJsPlugin({
       minimize: true,
       compress: {
