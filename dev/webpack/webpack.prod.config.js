@@ -13,6 +13,24 @@ baseWebpackConfig = merge(baseWebpackConfig, {
   devtool: config.productionSourceMap
     ? '#source-map'
     : false,
+  output: {
+    libraryTarget: 'umd',
+    umdNamedDefine: true
+  },
+  externals: {
+    jquery: {
+      commonjs: 'jQuery',
+      commonjs2: 'jQuery',
+      amd: 'jQuery',
+      root: '$'
+    },
+    lodash: {
+      commonjs: 'lodash',
+      commonjs2: 'lodash',
+      amd: 'lodash',
+      root: '_'
+    }
+  },
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
@@ -25,17 +43,15 @@ baseWebpackConfig = merge(baseWebpackConfig, {
       chunks: Object.keys(entries),
       // children: true,
       minChunks: function (module, count) {
-        // console.log(module.resource, (module.resource && /\.js$/.test(module.resource) && module.resource.indexOf(path.join(__dirname, '../../node_modules')) === 0), (module.resource && count > 2), count, 'minChunks')
-        console.log('minChunks: ', module.resource, count)
         const isNodeModules = module.resource && /\.js$/.test(module.resource) && module.resource.indexOf(path.join(__dirname, '../../node_modules')) === 0
         return isNodeModules && count >= 2 || !isNodeModules && count > 2
       }
     }),
     new webpack.optimize.CommonsChunkPlugin({
-      names: ['vendor', 'manifest'],
+      names: ['vendor'],
       minChunks: Infinity
     }),
-    new ExtractTextPlugin(utils.resolve(config.assetsRoot, '[name].css')),
+    new ExtractTextPlugin('[name].css'),
     new webpack.optimize.UglifyJsPlugin({
       minimize: true,
       compress: {

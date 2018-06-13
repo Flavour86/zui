@@ -5,7 +5,7 @@ var config = {
   prod: {
     env: require('./prod.env.js'),
     assetsRoot: utils.resolve('dist'),
-    assetsPublicPath: '/',
+    assetsPublicPath: '../../',
     productionSourceMap: true,
     cssSourceMap: false
   },

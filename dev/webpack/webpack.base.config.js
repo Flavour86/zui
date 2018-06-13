@@ -85,16 +85,18 @@ var webpackConfig = {
 }
 webpackConfig.entry = Object.assign(webpackConfig.entry, entries)
 Object.keys(entries).forEach(function (name) {
-  webpackConfig.entry[name] = [utils.resolve('dev/utils/dev-client')].concat(webpackConfig.entry[name])
+  if (!utils.isProd) {
+    webpackConfig.entry[name] = [utils.resolve('dev/utils/dev-client')].concat(webpackConfig.entry[name])
+  }
   var nameSpace = name.indexOf('/') > -1 ?  name.split('/')[1] : name
-  var demoFile = utils.resolve('src/components/' + nameSpace + '/demo.js')
+  var scriptFile = utils.resolve('src/components/' + nameSpace + '/script.js')
   webpackConfig.plugins.push(new HtmlWebpackPlugin({
     filename: name + '.html',
     template: utils.resolve('src/' + name + '.ejs'),
     inject: 'body',
     chunksSortMode: 'manual',
-    chunks: utils.isProd ? ['manifest', 'vendor', name] : ['vendor', name],
-    exampleScript: UglifyJS.minify(fs.readFileSync(utils.resolve(demoFile), 'utf8'), {mangle: {toplevel: true}}).code,
+    chunks: utils.isProd ? ['vendor', 'commons', name] : ['vendor', name],
+    exampleScript: UglifyJS.minify(fs.readFileSync(utils.resolve(scriptFile), 'utf8'), {mangle: {toplevel: true}}).code,
     minify: {
       // removeComments: true,
       // collapseWhitespace: true,
