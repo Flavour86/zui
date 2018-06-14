@@ -11,7 +11,11 @@ var webpackConfig = {
   entry: {
     index: utils.resolve('src/index.js'),
     vendor: [
-      'jquery/dist/jquery.min'
+      'jquery/dist/jquery.min',
+      'jquery-ui',
+      'moment',
+      'bootstrap-datetime-picker/js/bootstrap-datetimepicker.min',
+      'icheck'
     ]
   },
   output: {
@@ -95,7 +99,7 @@ Object.keys(entries).forEach(function (name) {
     template: utils.resolve('src/' + name + '.ejs'),
     inject: 'body',
     chunksSortMode: 'manual',
-    chunks: utils.isProd ? ['vendor', 'commons', name] : ['vendor', name],
+    chunks: ['vendor', 'jquery', name],
     exampleScript: UglifyJS.minify(fs.readFileSync(utils.resolve(scriptFile), 'utf8'), {mangle: {toplevel: true}}).code,
     minify: {
       // removeComments: true,

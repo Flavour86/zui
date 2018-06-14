@@ -1,10 +1,10 @@
 import 'bootstrap-datetime-picker/css/bootstrap-datetimepicker.min.css'
-import 'common/base'
 import 'bootstrap-datetime-picker/js/bootstrap-datetimepicker.min'
 import moment from 'moment'
+import base from 'common/base'
 import utils from 'utils'
 
-$.widget('zui.datetime', $.zui.base, {
+$.widget('zui.datetime', base, {
   options: {
     datetimeOptions: {
       format: 'yyyy-mm-dd hh:ss'

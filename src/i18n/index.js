@@ -1,7 +1,7 @@
-import 'jquery/dist/jquery.min'
 import onFire from 'onfire.js/dist/onfire.min'
 import utils from 'utils'
 
+let i18nObject
 class I18N {
   constructor() {
     this.lang = utils.LANGUAGE  // 默认语言
@@ -122,7 +122,8 @@ class I18N {
     return value
   }
 }
-
-if (!$.i18n || $.i18n.lang === undefined) {
-  $.i18n = new I18N(utils.LANGUAGE)
+if (!i18nObject) {
+  i18nObject = new I18N()
 }
+
+export default i18nObject

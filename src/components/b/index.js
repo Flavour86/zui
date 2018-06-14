@@ -1,7 +1,7 @@
 import base from 'common/base'
 import 'icheck'
 
-$.widget('zui.checkbox', base, {
+$.widget('zui.b', base, {
   options: {
     checkboxClass: 'icheckbox_flat-blue',
     separator: ','

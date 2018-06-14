@@ -37,16 +37,16 @@ baseWebpackConfig = merge(baseWebpackConfig, {
         NODE_ENV: '"production"'
       }
     }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'commons',
-      filename: "commons.js",
-      chunks: Object.keys(entries),
-      // children: true,
-      minChunks: function (module, count) {
-        const isNodeModules = module.resource && /\.js$/.test(module.resource) && module.resource.indexOf(path.join(__dirname, '../../node_modules')) === 0
-        return isNodeModules && count >= 2 || !isNodeModules && count > 2
-      }
-    }),
+    // new webpack.optimize.CommonsChunkPlugin({
+    //   name: 'commons',
+    //   filename: "commons.js",
+    //   chunks: Object.keys(entries),
+    //   // children: true,
+    //   minChunks: function (module, count) {
+    //     const isNodeModules = module.resource && /\.js$/.test(module.resource) && module.resource.indexOf(path.join(__dirname, '../../node_modules')) === 0
+    //     return isNodeModules && count >= 2 || !isNodeModules && count > 2
+    //   }
+    // }),
     new webpack.optimize.CommonsChunkPlugin({
       names: ['vendor'],
       minChunks: Infinity
