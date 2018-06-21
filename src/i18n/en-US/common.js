@@ -47,4 +47,4 @@ export default {
       statu_500: '500：Internal Server Error'
     }
   }
-}
+};

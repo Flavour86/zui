@@ -32,7 +32,8 @@ export default {
     utils: {
       copy_success: '复制成功',
       copy_msg: '复制到剪贴板：{0}',
-      copy_fail: '被浏览器拒绝！\n请在浏览器地址栏输入"about:config"并回车\n然后将"signed.applets.codebase_principal_support"设置为"true"',
+      copy_fail:
+        '被浏览器拒绝！\n请在浏览器地址栏输入"about:config"并回车\n然后将"signed.applets.codebase_principal_support"设置为"true"',
       console_description: '脚本错误 - Description：{0}',
       console_stack: '脚本错误 - Stack：{0}',
       error_msg_content: '脚本执行错误：{0}'
@@ -47,4 +48,4 @@ export default {
       statu_500: '500异常：服务器内部错误'
     }
   }
-}
+};

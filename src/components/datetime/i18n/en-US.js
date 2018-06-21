@@ -24,4 +24,4 @@ export default {
   decrementSecond: 'Decrement Second',
   togglePeriod: 'Toggle Period',
   selectTime: 'Select Time'
-}
+};

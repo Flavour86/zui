@@ -24,4 +24,4 @@ export default {
   decrementSecond: '减少一秒',
   togglePeriod: '切换周期',
   selectTime: '选择时间'
-}
+};

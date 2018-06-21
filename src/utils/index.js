@@ -1,5 +1,5 @@
-import * as $C from './consts'
+import * as $C from './consts';
 
 export default {
   ...$C
-}
+};

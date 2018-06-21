@@ -1,1 +1,1 @@
-export const LANGUAGE = window.navigator.systemLanguage || window.navigator.language
+export const LANGUAGE = window.navigator.systemLanguage || window.navigator.language;

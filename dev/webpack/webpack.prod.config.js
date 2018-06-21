@@ -17,7 +17,8 @@ baseWebpackConfig = merge(baseWebpackConfig, {
     libraryTarget: 'umd',
     umdNamedDefine: true
   },
-  externals: {
+  externals:
+    {
     jquery: {
       commonjs: 'jQuery',
       commonjs2: 'jQuery',

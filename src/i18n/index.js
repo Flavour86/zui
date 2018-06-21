@@ -1,45 +1,45 @@
-import onFire from 'onfire.js/dist/onfire.min'
-import utils from 'utils'
+import onFire from 'onfire.js/dist/onfire.min';
+import utils from 'utils';
 
-let i18nObject
+let i18nObject;
 class I18N {
   constructor() {
-    this.lang = utils.LANGUAGE  // 默认语言
-    this.map = {}  // 语言资源集合
-    this.extendMap = {}  // 记录组件拓展语言包
+    this.lang = utils.LANGUAGE; // 默认语言
+    this.map = {}; // 语言资源集合
+    this.extendMap = {}; // 记录组件拓展语言包
   }
 
   _loadCommonResource() {
-    const nameSpace = 'common'
+    const nameSpace = 'common';
     if (!this.map[nameSpace]) {
-      const res = require(`./${this.lang}/common.js`)
-      this.map[nameSpace] = res
+      const res = require(`./${this.lang}/common.js`);
+      this.map[nameSpace] = res;
     }
   }
   _loadComponentResource(nameSpace, extendLocale) {
     if (!nameSpace) {
-      console.warn('nameSpace is not find, Pass in the component name！')
-      return
+      console.warn('nameSpace is not find, Pass in the component name！');
+      return;
     }
-    let comLocale
+    let comLocale;
     // if (Object.prototype.toString.call(comLocale) !== '[object Object]') {
     //   comLocale = {}
     // }
-    comLocale = require(`components/${nameSpace}/i18n/${this.lang}.js`)
+    comLocale = require(`components/${nameSpace}/i18n/${this.lang}.js`);
     if (!comLocale || !Object.keys(comLocale).length) {
-      comLocale = {}
+      comLocale = {};
     }
-    this.map[nameSpace] = comLocale
+    this.map[nameSpace] = comLocale;
 
     if (extendLocale) {
       if (!this.extendMap[nameSpace]) {
-        this.extendMap[nameSpace] = extendLocale
+        this.extendMap[nameSpace] = extendLocale;
       }
       if (extendLocale[this.lang]) {
         this.map[nameSpace] = {
           ...this.map[nameSpace],
           ...extendLocale[this.lang]
-        }
+        };
       }
     }
   }
@@ -53,15 +53,15 @@ class I18N {
    */
   getFixedT(nameSpace, extendLocale, lang) {
     if (!lang && Object.prototype.toString.call(extendLocale) === '[object String]') {
-      this.lang = extendLocale
-      extendLocale = null
+      this.lang = extendLocale;
+      extendLocale = null;
     } else {
-      this.lang = lang
+      this.lang = lang;
     }
-    this._loadCommonResource()
-    this._loadComponentResource(nameSpace, extendLocale)
-    const current = this.map[nameSpace]
-    return this.$t.bind(this, current)
+    this._loadCommonResource();
+    this._loadComponentResource(nameSpace, extendLocale);
+    const current = this.map[nameSpace];
+    return this.$t.bind(this, current);
   }
 
   /** 改变组件的语言
@@ -70,17 +70,17 @@ class I18N {
    */
   changLanguage(lang = utils.LANGUAGE) {
     if (this.lang !== lang) {
-      this.lang = lang
+      this.lang = lang;
       Object.keys(this.map).forEach(name => {
         if (name === 'common') {
-          this._loadCommonResource(lang)
+          this._loadCommonResource(lang);
         } else {
-          this._loadComponentResource(lang, name, this.extendMap[name])
+          this._loadComponentResource(lang, name, this.extendMap[name]);
         }
-      })
+      });
 
-      console.log(this.map, lang)
-      onFire.fire('languageChanged')
+      console.log(this.map, lang);
+      onFire.fire('languageChanged');
     }
   }
 
@@ -92,38 +92,38 @@ class I18N {
    */
   $t(current, key, options) {
     if (!key) {
-      console.warn('i18n key is not find!')
-      return
+      console.warn('i18n key is not find!');
+      return;
     }
 
-    let value = this._getValueByKey(key, current, options)
+    let value = this._getValueByKey(key, current, options);
     if (value === undefined) {
-      value = this._getValueByKey(key, this.map['common'], options)
+      value = this._getValueByKey(key, this.map['common'], options);
     }
-    return value
+    return value;
   }
   _parseValue(value, options) {
-    let keys = Object.keys(options)
+    let keys = Object.keys(options);
     if (keys.length && value) {
       keys.forEach(key => {
-        value = value.replace(new RegExp(`{${key}}`, 'img'), options[key])
-      })
+        value = value.replace(new RegExp(`{${key}}`, 'img'), options[key]);
+      });
     }
-    return value
+    return value;
   }
   _getValueByKey(key, current, options) {
-    let value = current
-    let keys = key.split('.')
-    let ck
+    let value = current;
+    let keys = key.split('.');
+    let ck;
     while ((ck = keys.shift()) && value) {
-      value = value[ck]
+      value = value[ck];
     }
-    value = options ? this._parseValue(value, options) : value
-    return value
+    value = options ? this._parseValue(value, options) : value;
+    return value;
   }
 }
 if (!i18nObject) {
-  i18nObject = new I18N()
+  i18nObject = new I18N();
 }
 
-export default i18nObject
+export default i18nObject;

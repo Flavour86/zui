@@ -1,21 +1,31 @@
 {
   "parser"  : "babel-eslint",
   "extends" : [
-    "standard"
+    "standard",
+    "plugin:prettier/recommended"
   ],
   "plugins" : [
-    "flow-vars"
+    "flow-vars",
+    "prettier"
   ],
   "globals" : {
     "$"       : true
   },
   "env"     : {
-    "browser" : true
+    "browser" : true,
+    "es6": true
   },
   "rules": {
+    "prettier/prettier": [
+      "error",
+      {
+        "printWidth": 100,
+        "singleQuote": true,
+        "trailingComma": "none"
+      }
+    ],
     "arrow-parens": 0,
-    "jsx-quotes": [2, "prefer-double"],
-    "space-before-function-paren": [2, { "anonymous": "always", "named": "never" }],
+    "space-before-function-paren": 0,
     "flow-vars/define-flow-type": 1,
     "flow-vars/use-flow-type": 1,
     "spaced-comment": 0,
