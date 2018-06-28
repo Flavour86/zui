@@ -41,11 +41,6 @@ app.use(hotMiddleware)
 app.use(express.static(utils.resolve(config.assetsSubDirectory)))
 var uri = 'http://localhost:' + port
 
-var _resolve
-var readyPromise = new Promise(resolve => {
-  _resolve = resolve
-})
-
 console.log('> Starting dev server...')
 
 // 等待webpack处理完，打开浏览器
@@ -54,8 +49,6 @@ devMiddleware.waitUntilValid(() => {
   if (autoOpenBrowser && config.env.NODE_ENV === 'development') {
     opn(uri)
   }
-  _resolve()
+  // 服务开启
+  app.listen(port)
 })
-
-// 服务开启
-app.listen(port)

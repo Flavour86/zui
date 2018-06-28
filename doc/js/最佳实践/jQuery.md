@@ -43,7 +43,7 @@ jQuery("div.products");
 
   - 如果没有这么处理，那么异步加载回来的数据，就可能需要每次都去绑定事件。
   - 当你在一个容器中有许多节点，你想对所有的节点都绑定一个事件（包括还未在容器内的元素），delegation很适合这样的应用场景。使用Delegation，我们仅需要在父级绑定事件，然后查看哪个子节点(目标节点)触发了事件。当你有一个很多数据的table的时候，你想对td节点设置事件，这就变得很方便。先获得table，然后为所有的td节点设置delegation事件
-  - Delegated events do not work for SVG  
+  - Delegated events do not work for SVG
 
 ``` js
 // recommended:
@@ -60,7 +60,7 @@ $( "#dataTable tbody" ).on( "click", "tr", function() {
 $parent.find('.child')
 这条是最快的语句。.find() 法会调用浏览器的原生方法（getElementById、getElementByName、getElementByTagName 等），所以速度较快。
 
-$('.child', $parent)   
+$('.child', $parent)
 这条语句的意思是，给定一个 DOM 对象，然后从中选择一个子元素。jQuery 会自动把这条语句转成 $.parent.find('child')，这会导致一定的性能损失。它比最快的形式慢了 5%-10%。
 
 $('.child', $('#parent'))
@@ -90,7 +90,7 @@ $('#parent .child')
   - 不要频繁使用.append()、.insertBefore()和.insetAfter()这样的方法
   - 如果你要对一个DOM元素进行大量处理，应该先用.detach()方法，把这个元素从DOM中取出来，处理完毕以后，再重新插回文档
   - 如果要插入多个元素，就先把它们合并，然后再一次性插入。根据测试，合并插入比不合并插入，快了将近10倍
-  - 如果你要在DOM元素上储存数据，不要写成下面这样：  
+  - 如果你要在DOM元素上储存数据，不要写成下面这样：
 
 ``` js
 // avoid:
